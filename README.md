@@ -12,8 +12,6 @@ The architecture aims to validate the following key capabilities:
 
 ![Architecture Schema](docs/architecture-schema.png)
 
-(Note: For better clarity on the authentication process, it is recommended to add a **Sequence Diagram** illustrating the handshake between the Gateway, Auth Service, and Client. Additionally, a **Component Diagram** could help visualize the communication interfaces between the Micro-frontends and the Container.)
-
 ## Key Benefits & Scalability
 
 This architecture offers significant advantages for enterprise-grade application development:
