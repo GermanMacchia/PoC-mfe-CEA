@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    environment:
+      POSTGRES_USER: poc
+      POSTGRES_PASSWORD: poc
+      POSTGRES_DB: poc_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - '6379:6379'
+
+  auth-service:
+    build: ./auth-service
+    container_name: auth-service
+    depends_on:
+      - redis
+    env_file:
+      - ./auth-service/.env
+    ports:
+      - '8080:8080'
+
+  rest-api:
+    build: ./rest-api
+    container_name: rest-api
+    depends_on:
+      - postgres
+    env_file:
+      - ./rest-api/.env
+    ports:
+      - '3000:3000'
+
+  gateway:
+    image: nginx:alpine
+    container_name: gateway
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - '80:80'
+    depends_on:
+      - auth-service
+      - rest-api
+
+volumes:
+  pgdata:
