@@ -3,13 +3,17 @@
 # Lineamientos
 LINEAMIENTOS.MD
 
+# Librerias
+container/.astro
+backoffice/.angular
+
 # Dependencies
 node_modules
 .pnp
 .pnp.js
 
 # Local env files
-.env
+rest-api/.env
 .env.local
 .env.development.local
 .env.test.local
